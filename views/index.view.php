@@ -27,7 +27,7 @@
 
 <section class="filter container m-5">
         <div class="d-flex d-flex justify-content-between">
-            <h4>Filter bij type</h4>
+            <h4>Filter bij type 12345</h4>
             <div class="dropdown">
                 <button class="btn btn-custom dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                     Order bij

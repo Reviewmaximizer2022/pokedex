@@ -2,14 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="91d20c90-b46a-47c1-8d3f-a9004d45067f" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/pokedex.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/pokedex.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/functions.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/functions.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/index.view.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/index.view.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ComposerSettings">
+  <component name="ComposerSettings" doNotAsk="true">
+    <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
     <execution />
   </component>
   <component name="Git.Settings">
@@ -17,6 +22,19 @@
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration">
+    <include_path>
+      <path value="$PROJECT_DIR$/vendor/composer" />
+      <path value="$PROJECT_DIR$/vendor/psr/http-message" />
+      <path value="$PROJECT_DIR$/vendor/psr/http-client" />
+      <path value="$PROJECT_DIR$/vendor/psr/http-factory" />
+      <path value="$PROJECT_DIR$/vendor/symfony/deprecation-contracts" />
+      <path value="$PROJECT_DIR$/vendor/guzzlehttp/promises" />
+      <path value="$PROJECT_DIR$/vendor/ralouphie/getallheaders" />
+      <path value="$PROJECT_DIR$/vendor/guzzlehttp/psr7" />
+      <path value="$PROJECT_DIR$/vendor/guzzlehttp/guzzle" />
+    </include_path>
   </component>
   <component name="ProjectId" id="2J9FIFTOsSwGNa84N7evKslBaIg" />
   <component name="ProjectViewState">
@@ -28,6 +46,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
@@ -47,6 +66,26 @@
       <workItem from="1671545327708" duration="73000" />
       <workItem from="1673423288256" duration="27000" />
       <workItem from="1673612710251" duration="487000" />
+      <workItem from="1674485066965" duration="70000" />
+      <workItem from="1674485235196" duration="182000" />
+      <workItem from="1674636596207" duration="231000" />
+      <workItem from="1674654669059" duration="960000" />
+      <workItem from="1674895332182" duration="2259000" />
+      <workItem from="1675676198156" duration="106000" />
+      <workItem from="1675677688669" duration="96000" />
+      <workItem from="1675677790942" duration="93000" />
+      <workItem from="1675678612372" duration="630000" />
+      <workItem from="1675879284550" duration="1057000" />
+      <workItem from="1675880427480" duration="31000" />
+      <workItem from="1675880502053" duration="130000" />
+      <workItem from="1675880688878" duration="216000" />
+      <workItem from="1675880977887" duration="14000" />
+      <workItem from="1675881086301" duration="196000" />
+      <workItem from="1675881432082" duration="305000" />
+      <workItem from="1675881955342" duration="45000" />
+      <workItem from="1675882078162" duration="62000" />
+      <workItem from="1675882448235" duration="400000" />
+      <workItem from="1675882918401" duration="323000" />
     </task>
     <servers />
   </component>

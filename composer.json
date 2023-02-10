@@ -1,0 +1,17 @@
+{
+    "name": "jesse/pokedex",
+    "autoload": {
+        "psr-4": {
+            "Jesse\\Pokedex\\": "app/"
+        }
+    },
+    "authors": [
+        {
+            "name": "JdeB",
+            "email": "github@reviewmaximizer.nl"
+        }
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "^7.5"
+    }
+}

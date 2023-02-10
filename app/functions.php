@@ -83,7 +83,6 @@ function resultsToCollection(array|object $pokemon): array
         'experience' => $pokemon['base_experience'],
         'image' => $pokemon['sprites']['front_default']
     ];
-
 }
 
 function getCache()

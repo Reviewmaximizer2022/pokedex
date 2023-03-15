@@ -34,6 +34,15 @@ html, * {
     border: 1px solid rgba(209, 213, 219, 0.3);
 }
 
+.card img {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-top: 1px solid rgba(255,255,255,0.2);
+}
+
+.card { transition: .2s ease-in-out; }
+.card:hover { margin-top: -15px;}
+
 .card-bg-normal { background: rgba(217, 217, 217, 0.22); }
 .card-bg-water { background: rgba(66, 224, 250, 0.22); }
 .card-bg-grass { background: rgba(135, 238, 88, 0.22); }
@@ -74,12 +83,3 @@ html, * {
 .text-bg-dark { background: #333; }
 
 .filter span { font-size: 0.9em; }
-
-.card img {
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    border-top: 1px solid rgba(255,255,255,0.2);
-}
-
-.card { transition: .2s ease-in-out; }
-.card:hover { margin-top: -15px;}

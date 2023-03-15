@@ -2,6 +2,8 @@
 
 include 'app/functions.php';
 
+//insertPokemonTypes();
+
 $cache = getCache();
 
 if(empty($cache)) {

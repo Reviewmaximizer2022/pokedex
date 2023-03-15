@@ -4,7 +4,7 @@ function apiUrl(array $options = []): string
 {
     $url = 'https://pokeapi.co/api/v2/pokemon';
     $url .= '?'.http_build_query([
-            'limit' => 6,
+            'limit' => $options['limit'] ?? 6,
             'offset' => $options['offset'] ?? 0
         ]);
 
@@ -26,10 +26,15 @@ function makeApiRequest(string $url = '')
     return json_decode($data, true);
 }
 
+function db()
+{
+    return new PDO('mysql:host=localhost;dbname=pokedex', 'root', '');
+}
+
 function initialRequest(): array|object
 {
     $cache = getCache();
-    $response = makeApiRequest(apiUrl())['results'];
+    $response = makeApiRequest(apiUrl(options: ['offset' => 0, 'limit' => 1000]))['results'];
 
     $pokemons = array_map(fn($pokemon) => $pokemon['name'], $response);
     $results = [];
@@ -37,12 +42,16 @@ function initialRequest(): array|object
     foreach($pokemons as $pokemon) {
         $response = getPokemon(pokemon: $pokemon);
 
-        $results['pokemon'][] = resultsToCollection($response);
+//        $results['pokemon'][] = resultsToCollection($response);
+        $poke = resultsToCollection($response);
+        $db = db();
+        $stmt = $db->prepare('INSERT INTO pokemon (name, base_experience, card_id) VALUES (?, ?, ?)');
+        $stmt->execute([$poke['name'], $poke['experience'], $poke['id']]);
     }
 
-    setCache($results);
+//    setCache($results);
 
-    return $cache;
+//    return $cache;
 }
 
 function getPokemon(string $pokemon = '')
@@ -50,7 +59,7 @@ function getPokemon(string $pokemon = '')
     return makeApiRequest("https://pokeapi.co/api/v2/pokemon/{$pokemon}");
 }
 
-function loadNewSet(array $options)
+function loadNewSet(array $options): array
 {
     $response = makeApiRequest(apiUrl(options: ['offset' => $options['offset']]))['results'];
 
@@ -104,4 +113,53 @@ function dd(object|array|string $data)
     echo '</pre>';
 
     exit;
+}
+
+function getAllPokemon()
+{
+    $stmt = db()->prepare('SELECT name FROM pokemon');
+    $stmt->execute();
+
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function getAllTypes()
+{
+    $stmt = db()->prepare('SELECT name FROM type');
+    $stmt->execute();
+
+    $types = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $values = [];
+
+    foreach($types as $type) {
+        $values[] = $type['name'];
+    }
+
+    return $values;
+}
+
+function insertType(string $type): bool
+{
+    $stmt = db()->prepare('INSERT INTO type (name) VALUES (?)');
+
+    return $stmt->execute([$type]);
+}
+
+function insertPokemonTypes()
+{
+    $pokemons = getAllPokemon();
+
+    foreach($pokemons as $pokemon)
+    {
+        $allTypes = getAllTypes();
+
+        $pokemon = getPokemon($pokemon['name']);
+        $types = $pokemon['types'];
+
+        foreach($types as $type) {
+            if(!in_array($type['type']['name'], $allTypes)) {
+                insertType($type['type']['name']);
+            }
+        }
+    }
 }

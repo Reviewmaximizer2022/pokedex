@@ -1,88 +1,59 @@
-const container = document.querySelector('.pokemon.container .row')
-let lastCard = container.lastElementChild
-
-const callback = (array) => {
-    array.forEach(card => {
-        if(card.isIntersecting) {
-            observer.unobserve(lastCard)
-            apiCall()
-            lastCard = document.querySelector('.pokemon.container').lastElementChild
-        }
-    })
-}
-
-const observer = new IntersectionObserver(callback, {threshold: 0.4, rootMargin: "100px"})
-observer.observe(lastCard)
+const container = document.querySelector('.pokemon.container');
+let lastCard = container.lastElementChild;
 
 const apiCall = async () => {
-    const offset = document.querySelectorAll('.pokemon .row .col-lg-2').length
-    const form = new FormData
-    form.append('offset', offset)
+    const offset = document.querySelectorAll('.pokemon .row .col-lg-2').length;
+    const form = new FormData();
+    form.append('offset', offset);
 
-    await fetch('../app/api/load.php', {
-        method: "POST",
+    const res = await fetch('../app/api/load.php', {
+        method: 'POST',
         body: form,
-    }).then(data => data.json())
-        .then(res => {
+    }).then(res => res.json());
 
-            const newRow = document.createElement('div')
-            newRow.classList.add('row')
+    const newRow = document.createElement('div');
+    newRow.classList.add('row');
 
-            for(let pokemon of res.data) {
+    res.data.forEach(pokemon => {
+        const { id, experience, name, types, image } = pokemon;
 
-                const newPokemon = document.createElement('div')
-                newPokemon.classList.add('col-lg-2', 'col-sm-4', 'mt-4')
+        const cardTop = `
+            <div class="d-flex justify-content-between">
+              <strong>#${id}</strong>
+              <span>EXP: ${experience}</span>
+            </div>
+        `;
 
-                const card = document.createElement('div')
-                card.classList.add('card')
+        const pokeTypes = types.map(type => `<span class="badge text-bg-${type}">${type}</span>`).join('');
+        const newPokemon = `
+            <div class="col-lg-2 col-sm-4 mt-4">
+                <div class="card">
+                  <img class="card-bg-${types[0]}" src="${image}" alt="${name}">
+                  <div class="card-body">
+                    <div class="card-text">
+                      ${cardTop}
+                      <p class="h5 mt-2">${name}</p>
+                      ${pokeTypes}
+                    </div>
+                  </div>
+                </div>
+            </div>
+        `;
 
-                const cardBody = document.createElement('div')
-                cardBody.classList.add('card-body')
+        newRow.insertAdjacentHTML('beforeend', newPokemon);
+    });
 
-                const cardText = document.createElement('div')
-                cardText.classList.add('card-text')
+    container.appendChild(newRow);
 
-                const cardTop = document.createElement('div')
-                cardTop.classList.add('d-flex', 'justify-content-between')
+    lastCard = container.lastElementChild;
+    observer.observe(lastCard)
+};
 
-                const cardStrong = document.createElement('strong')
-                cardStrong.innerText = `#${pokemon.id}`
+const observer = new IntersectionObserver(([entry]) => {
+    if (entry.isIntersecting) {
+        observer.unobserve(lastCard);
+        apiCall();
+    }
+}, { threshold: 0.9, rootMargin: '1px' });
 
-                const cardSpan = document.createElement('span')
-                cardSpan.innerText = `EXP: ${pokemon.experience}`
-
-                cardTop.appendChild(cardStrong)
-                cardTop.appendChild(cardSpan)
-
-                const pokeName = document.createElement('p')
-                pokeName.classList.add('h5', 'mt-2')
-                pokeName.innerText = pokemon.name
-
-                cardText.appendChild(cardTop)
-                cardText.appendChild(pokeName)
-
-                for(let type of pokemon.types) {
-                    let pokeType = document.createElement('span')
-                    pokeType.classList.add('badge', `text-bg-${type}`)
-                    pokeType.innerText = type
-                    cardText.appendChild(pokeType)
-                }
-
-                cardBody.appendChild(cardText)
-
-                const pokeImage = document.createElement('img')
-                pokeImage.classList.add(`card-bg-${pokemon.types[0]}`)
-                pokeImage.src = pokemon.image
-
-                card.appendChild(pokeImage)
-                card.appendChild(cardBody)
-
-                newPokemon.appendChild(card)
-                newRow.appendChild(newPokemon)
-            }
-
-            document.querySelector('.pokemon.container').appendChild(newRow)
-        }).then(() => {
-            observer.observe(lastCard)
-        });
-}
+observer.observe(lastCard);

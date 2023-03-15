@@ -1,99 +1,88 @@
-const filterTypes = document.querySelectorAll('.filter button span')
+const pokeContainer = document.querySelector('.pokemon.container');
+const filterTypes = Array.from(document.querySelectorAll('.filter button span'));
 
-for(let type of filterTypes) {
-    type.addEventListener('click', (e) => {
+const chunk = (arr, size) =>
+    Array.from({ length: Math.ceil(arr.length / size) }, (_, i) =>
+        arr.slice(i * size, (i + 1) * size)
+    );
 
-        const pokeContainer = document.querySelector('.pokemon.container')
-        const form = new FormData;
-        form.append('type', e.target.dataset.type)
+const createPokemonCard = ({ id, experience, name, types, image }) => {
+    const cardTop = `
+        <div class="d-flex justify-content-between">
+          <strong>#${id}</strong>
+          <span>EXP: ${experience}</span>
+        </div>
+    `;
 
-        const pokemon = async () => {
-            const response = await fetch('../app/api/filter.php', {
-                method: 'POST',
-                body: form
-            })
+    const pokeTypes = types
+        .map((type) => `<span class="badge text-bg-${type}">${type}</span>`)
+        .join('');
 
-            return await response.json()
-        }
+    const pokeImage = `
+        <img class="card-bg-${types[0]}" src="${image}" alt="${name}">
+    `;
 
-       pokemon().then(data => {
+    const pokeName = `
+        <p class="h5 mt-2">${name}</p>
+    `;
 
-           let pokemons = Object.values(data.pokemon)
-           let newPokemons = [];
+    const cardText = `
+        <div class="card-text">
+          ${cardTop}
+          ${pokeName}
+          ${pokeTypes}
+        </div>
+    `;
 
-           function* chunk(arr, off) {
-               for(let i = 0; i < arr.length; i += off) {
-                   yield arr.slice(i, i + off)
-               }
-           }
+    const cardBody = `
+        <div class="card-body">
+          ${cardText}
+        </div>
+    `;
 
-           for(let pokemon of [...chunk(pokemons, 6)]) {
-               let newRow = document.createElement('div')
-               newRow.classList.add('row')
+    const card = `
+        <div class="card">
+          ${pokeImage}
+          ${cardBody}
+        </div>
+    `;
 
-                pokemon.forEach((pokemon, key) => {
+    return `
+        <div class="col-lg-2 col-sm-4">${card}</div>
+    `;
+};
 
-                   const newPokemon = document.createElement('div')
-                   newPokemon.classList.add('col-lg-2', 'col-sm-4')
+const fetchPokemon = async (type) => {
+    const form = new FormData();
+    form.append('type', type);
 
-                    if(key === 0) {
-                        newRow.classList.add('mt-4')
-                    }
+    const response = await fetch('../app/api/filter.php', {
+        method: 'POST',
+        body: form,
+    });
 
-                   const card = document.createElement('div')
-                   card.classList.add('card')
+    const data = await response.json();
 
-                   const cardBody = document.createElement('div')
-                   cardBody.classList.add('card-body')
+    return Object.values(data.pokemon);
+};
 
-                   const cardText = document.createElement('div')
-                   cardText.classList.add('card-text')
+const renderPokemon = (pokemons) => {
+    const rows = chunk(pokemons, 6).map((pokemonRow) => {
+        const cols = pokemonRow.map(createPokemonCard).join('');
+        const row = document.createElement('div');
+        row.classList.add('row', 'mt-4');
+        row.insertAdjacentHTML('beforeend', cols);
 
-                   const cardTop = document.createElement('div')
-                   cardTop.classList.add('d-flex', 'justify-content-between')
+        return row;
+    });
 
-                   const cardStrong = document.createElement('strong')
-                   cardStrong.innerText = `#${pokemon.id}`
+    pokeContainer.replaceChildren(...rows);
+};
 
-                   const cardSpan = document.createElement('span')
-                   cardSpan.innerText = `EXP: ${pokemon.experience}`
-
-                   cardTop.appendChild(cardStrong)
-                   cardTop.appendChild(cardSpan)
-
-                   const pokeName = document.createElement('p');
-                   pokeName.classList.add('h5', 'mt-2')
-
-                   pokeName.innerText = pokemon.name
-
-                   cardText.appendChild(cardTop)
-                   cardText.appendChild(pokeName)
-
-                   for(let type of pokemon.types) {
-                       let pokeType = document.createElement('span')
-                       pokeType.classList.add('badge', `text-bg-${type}`)
-                       pokeType.innerText = type
-                       cardText.appendChild(pokeType)
-                   }
-
-                   cardBody.appendChild(cardText)
-
-                   const pokeImage = document.createElement('img')
-                   pokeImage.classList.add(`card-bg-${pokemon.types[0]}`)
-                   pokeImage.src = pokemon.image
-
-                   card.appendChild(pokeImage)
-                   card.appendChild(cardBody)
-
-                   newPokemon.appendChild(card)
-                   newRow.appendChild(newPokemon)
-
-                })
-
-               newPokemons.push(pokeContainer.appendChild(newRow))
-           }
-
-           pokeContainer.replaceChildren(...newPokemons)
-       })
+filterTypes.forEach((type) =>
+    type.addEventListener('click', async (event) => {
+        const type = event.target.dataset.type;
+        const pokemons = await fetchPokemon(type);
+        renderPokemon(pokemons);
     })
-}
+);

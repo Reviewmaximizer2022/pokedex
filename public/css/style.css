@@ -41,7 +41,7 @@ html, * {
 }
 
 .card { transition: .2s ease-in-out; }
-.card:hover { margin-top: -15px;}
+.card:hover { margin-top: -10px;}
 
 .card-bg-normal { background: rgba(217, 217, 217, 0.22); }
 .card-bg-water { background: rgba(66, 224, 250, 0.22); }

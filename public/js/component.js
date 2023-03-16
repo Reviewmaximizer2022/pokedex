@@ -12,7 +12,7 @@ const apiCall = async () => {
     }).then(res => res.json());
 
     const newRow = document.createElement('div');
-    newRow.classList.add('row');
+    newRow.classList.add('row', 'gy-3', 'mt-0');
 
     res.data.forEach(pokemon => {
         const { id, experience, name, types, image } = pokemon;
@@ -26,7 +26,7 @@ const apiCall = async () => {
 
         const pokeTypes = types.map(type => `<span class="badge text-bg-${type}">${type}</span>`).join('');
         const newPokemon = `
-            <div class="col-lg-2 col-sm-4 mt-4">
+            <div class="col-lg-2 col-sm-4">
                 <div class="card">
                   <img class="card-bg-${types[0]}" src="${image}" alt="${name}">
                   <div class="card-body">

@@ -63,7 +63,7 @@
 </section>
 
 <section class="pokemon container mb-5">
-    <div class="row">
+    <div class="row gy-3">
         <?php foreach($collection as $pokemon): ?>
             <div class="col-lg-2 col-sm-4">
                 <div class="card">

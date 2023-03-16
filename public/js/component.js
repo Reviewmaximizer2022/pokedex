@@ -54,6 +54,47 @@ const observer = new IntersectionObserver(([entry]) => {
         observer.unobserve(lastCard);
         apiCall();
     }
-}, { threshold: 0.9, rootMargin: '1px' });
+}, { threshold: 0.22 });
 
 observer.observe(lastCard);
+
+const search = document.querySelector('input')
+
+const render = (pokemons) => {
+
+    console.log(pokemons);
+
+    const rows = chunk(pokemons, 6).map((pokemonRow) => {
+        const cols = pokemonRow.map(createPokemonCard).join('');
+        const row = document.createElement('div');
+        row.classList.add('row', 'mt-4');
+        row.insertAdjacentHTML('beforeend', cols);
+
+        return row;
+    });
+
+    container.replaceChildren(...rows);
+};
+
+function searchPokemon(event)
+{
+
+
+   return setTimeout(async () => {
+        const pokemon = event.target.value
+        const form = new FormData
+        form.append('pokemon', pokemon);
+
+        const res = await fetch('../app/api/find.php', {
+            method: 'POST',
+            body: form,
+        }).then(res => res.json())
+
+       render(Object.values(res.data))
+
+    }, 400)
+}
+
+search.addEventListener('keyup', (e) => {
+    searchPokemon(e);
+})

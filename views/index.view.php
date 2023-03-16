@@ -20,12 +20,14 @@
 </section>
 
 <section class="search">
-    <div class="d-flex justify-content-center p-5">
-        <input type="text" placeholder="Zoek pokémon" class="form-control w-25 p-3">
+    <div class="row p-5 d-flex justify-content-center">
+        <div class="col-lg-3">
+            <input type="text" placeholder="Zoek pokemon" class="form-control">
+        </div>
     </div>
 </section>
 
-<section class="filter container m-5">
+<section class="filter container my-5">
         <div class="d-flex d-flex justify-content-between">
             <h4>Filter bij type</h4>
             <div class="dropdown">

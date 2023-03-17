@@ -31,28 +31,6 @@ function db()
     return new PDO('mysql:host=localhost;dbname=pokedex', 'root', '');
 }
 
-function initialRequest(): array|object
-{
-    $cache = getCache();
-    $response = makeApiRequest(apiUrl(options: ['offset' => 0, 'limit' => 1000]))['results'];
-
-    $pokemons = array_map(fn($pokemon) => $pokemon['name'], $response);
-    $results = [];
-
-    foreach($pokemons as $pokemon) {
-        $response = getPokemon(pokemon: $pokemon);
-
-//        $results['pokemon'][] = resultsToCollection($response);
-        $poke = resultsToCollection($response);
-        $db = db();
-        $stmt = $db->prepare('INSERT INTO pokemon (name, base_experience, card_id) VALUES (?, ?, ?)');
-        $stmt->execute([$poke['name'], $poke['experience'], $poke['id']]);
-    }
-
-//    setCache($results);
-
-//    return $cache;
-}
 
 function getPokemon(string $pokemon = '')
 {
@@ -61,21 +39,7 @@ function getPokemon(string $pokemon = '')
 
 function loadNewSet(array $options): array
 {
-    $response = makeApiRequest(apiUrl(options: ['offset' => $options['offset']]))['results'];
-
-    $results = getCache();
-    $pokemons = array_map(fn($pokemon) => $pokemon['name'], array_slice($results['pokemon'], $options['offset'], 6) ?: $response);
-    $cachedPokemons = array_map(fn($pokemon) => $pokemon['name'], array_slice($results['pokemon'], $options['offset'], 6));
-
-    foreach($pokemons as $pokemon) {
-        if(!in_array($pokemon, $cachedPokemons)) {
-            $results['pokemon'][] = resultsToCollection(getPokemon($pokemon));
-        }
-    }
-
-    setCache($results);
-
-    return array_slice($results['pokemon'], $options['offset'], 6);
+    return array_slice(getCache()['pokemon'], $options['offset'], 6);
 }
 
 function filter(string $type, array $options = []): array
@@ -97,13 +61,6 @@ function resultsToCollection(array|object $pokemon): array
 function getCache()
 {
     return json_decode(file_get_contents(__DIR__.'/../public/cache/poke.cache'), true);
-}
-
-function setCache(string|array $response)
-{
-    file_put_contents(__DIR__.'/../public/cache/poke.cache', json_encode($response));
-
-    return getCache();
 }
 
 function dd(object|array|string $data)

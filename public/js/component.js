@@ -67,7 +67,7 @@ const render = (pokemons) => {
     const rows = chunk(pokemons, 6).map((pokemonRow) => {
         const cols = pokemonRow.map(createPokemonCard).join('');
         const row = document.createElement('div');
-        row.classList.add('row', 'mt-4');
+        row.classList.add('row', 'gy-3', 'mt-0');
         row.insertAdjacentHTML('beforeend', cols);
 
         return row;
@@ -78,9 +78,7 @@ const render = (pokemons) => {
 
 function searchPokemon(event)
 {
-
-
-   return setTimeout(async () => {
+    return setTimeout(async () => {
         const pokemon = event.target.value
         const form = new FormData
         form.append('pokemon', pokemon);
@@ -90,7 +88,7 @@ function searchPokemon(event)
             body: form,
         }).then(res => res.json())
 
-       render(Object.values(res.data))
+        render(Object.values(res.data))
 
     }, 400)
 }

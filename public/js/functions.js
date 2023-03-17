@@ -70,7 +70,7 @@ const renderPokemon = (pokemons) => {
     const rows = chunk(pokemons, 6).map((pokemonRow) => {
         const cols = pokemonRow.map(createPokemonCard).join('');
         const row = document.createElement('div');
-        row.classList.add('row', 'mt-4');
+        row.classList.add('row', 'gy-3', 'mt-0');
         row.insertAdjacentHTML('beforeend', cols);
 
         return row;

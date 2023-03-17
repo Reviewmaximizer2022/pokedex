@@ -1,5 +1,7 @@
 <?php
 
+require 'vendor/autoload.php';
+
 function apiUrl(array $options = []): string
 {
     $url = 'https://pokeapi.co/api/v2/pokemon';
@@ -11,19 +13,12 @@ function apiUrl(array $options = []): string
     return $url;
 }
 
-function makeApiRequest(string $url = '')
+function makeApiRequest(string $method = 'GET', string $url = '')
 {
-    $curl = curl_init();
+    $guzzle = new \GuzzleHttp\Client();
+    $response = $guzzle->request($method, $url);;
 
-    curl_setopt($curl, CURLOPT_URL, $url);
-    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($curl, CURLOPT_HEADER, false);
-
-    $data = curl_exec($curl);
-
-    curl_close($curl);
-
-    return json_decode($data, true);
+    return json_decode($response->getBody()->getContents(), true);
 }
 
 function db()
@@ -63,15 +58,6 @@ function getCache()
     return json_decode(file_get_contents(__DIR__.'/../public/cache/poke.cache'), true);
 }
 
-function dd(object|array|string $data)
-{
-    echo '<pre>';
-    var_dump($data);
-    echo '</pre>';
-
-    exit;
-}
-
 function getAllPokemon()
 {
     $stmt = db()->prepare('SELECT name FROM pokemon');
@@ -104,19 +90,64 @@ function insertType(string $type): bool
 
 function insertPokemonTypes()
 {
-    $pokemons = getAllPokemon();
+    $query = db()->prepare('SELECT p.id, p.name, p.description, pt.pokemon_id FROM pokemon as p LEFT JOIN pokemon_type as pt ON p.id = pt.pokemon_id LIMIT 1');
+    $query->execute();
+    $pokemons = $query->fetchAll(PDO::FETCH_ASSOC);
+    $allTypes = getAllTypes();
+
 
     foreach($pokemons as $pokemon)
     {
-        $allTypes = getAllTypes();
-
-        $pokemon = getPokemon($pokemon['name']);
-        $types = $pokemon['types'];
+        $response = makeApiRequest(url: "https://pokeapi.glitch.me/v1/pokemon/{$pokemon['name']}");
+        $types = $response[0]['types'];
 
         foreach($types as $type) {
-            if(!in_array($type['type']['name'], $allTypes)) {
-                insertType($type['type']['name']);
+            if(!in_array($type, $allTypes)) {
+                dump([str_pad($pokemon['id'], 3, '0', STR_PAD_LEFT), $response[0]['name'], $type]);
             }
         }
     }
+
+    return false;
+}
+
+function add(string|array $value) {
+    $queue = new SplQueue();
+
+    if(is_array($value)) {
+        foreach($value as $val) {
+            $queue->enqueue($val);
+        }
+    } else {
+        $queue->enqueue($value);
+    }
+
+    $queue->rewind();
+
+    return $queue;
+}
+
+function run(SplQueue $queue)
+{
+    while($queue->valid()) {
+        echo $queue->current(), "\n";
+
+        $queue->next();
+    }
+}
+
+function dd(object|array|string $data)
+{
+    echo '<pre>';
+    var_dump($data);
+    echo '</pre>';
+
+    exit;
+}
+
+function dump(object|array|string $data)
+{
+    echo '<pre>';
+    var_dump($data);
+    echo '</pre>';
 }

@@ -27,7 +27,7 @@
     </div>
 </section>
 
-<section class="filter container my-5">
+<section class="filter container mt-5">
         <div class="d-flex d-flex justify-content-between">
             <h4>Filter bij type</h4>
             <div class="dropdown">
@@ -67,7 +67,7 @@
 <section class="pokemon container mb-5">
     <div class="row gy-3">
         <?php foreach($collection as $pokemon): ?>
-            <div class="col-lg-2 col-sm-4">
+            <div class="col-lg-2 col-sm-4" data-id="<?= $pokemon['id'] ?>">
                 <div class="card">
                     <img src="<?= $pokemon['image'] ?>" class="card-bg-<?= $pokemon['types'][0] ?>" alt="...">
                     <div class="card-body">

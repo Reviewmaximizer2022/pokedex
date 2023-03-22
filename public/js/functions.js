@@ -19,7 +19,7 @@ const createPokemonCard = ({ id, experience, name, types, image }) => {
         .join('');
 
     const pokeImage = `
-        <img class="card-bg-${types[0]}" src="${image}" alt="${name}">
+        <img class="card-bg-${types[0]}" src="${image ?? 'https://m.media-amazon.com/images/I/71WkWKFRSWL.png'}" alt="${name}">
     `;
 
     const pokeName = `

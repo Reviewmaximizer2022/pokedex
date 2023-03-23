@@ -1,6 +1,6 @@
 <?php
 
-//include_once 'vendor/autoload.php';
+include_once __DIR__.'/../vendor/autoload.php';
 
 function getCache()
 {
@@ -23,22 +23,20 @@ function apiUrl(array $options = []): string
     return $url;
 }
 
-function getPokemonAbilities($pokemon)
-{
-    return array_map(fn($ability) => $ability['ability']['name'], getPokemon($pokemon)['abilities']);
-}
-
 /**
  * @throws \GuzzleHttp\Exception\GuzzleException
  */
 function makeApiRequest(string $method = 'GET', string $url = '')
 {
     $guzzle = new \GuzzleHttp\Client();
-    $response = $guzzle->request($method, $url);;
 
-    return json_decode($response->getBody()->getContents(), true);
+    try {
+        $response = $guzzle->request($method, $url);
+        return json_decode($response->getBody()->getContents(), true);
+    } catch (\Exception $e) {
+        echo 'error';
+    }
 }
-
 
 /**
  * @throws \GuzzleHttp\Exception\GuzzleException
@@ -69,24 +67,10 @@ function dump(object|array|string $data)
     echo '</pre>';
 }
 
-function getAllPokemon() {
-    $query = db()->prepare('SELECT * FROM pokemon');
-    $query->execute();
+function getAllPokemon()
+{
+    $sql = db()->prepare('SELECT id,name,description FROM pokemon WHERE description IS NULL');
+    $sql->execute();
 
-    return $query->fetchAll(PDO::FETCH_ASSOC);
+    return $sql->fetchAll(PDO::FETCH_ASSOC);
 }
-
-//function insertPokemonAbilities()
-//{
-//    $pokemons = getAllPokemon();
-//    $query = db()->prepare('SELECT * FROM pokemon JOIN pokemon_ability ON pokemon.id = pokemon_ability.pokemon_id');
-//    $query->execute();
-//
-//    $dbAbilities = $query->fetchAll(PDO::FETCH_ASSOC);
-//
-//    foreach($pokemons as $pokemon) {
-//        $abilities = getPokemonAbilities($pokemon['name']);
-//
-//        dd($abilities);
-//    }
-//}

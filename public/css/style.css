@@ -1,7 +1,11 @@
 body {
     background-image: url('https://external-preview.redd.it/NXrR_qnMRHrwUoE8pbeiX26fq4mNctFsmdEghRVApSQ.jpg?auto=webp&s=b18e1b0df84f417036d4e1ac0affb6245a071ebf');
-    background-position: 50% 20%;
+    background-position: 55% 0;
+    -webkit-background-size: 55% 0;
     background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    object-fit: cover;
 }
 
 html, * {
@@ -13,6 +17,7 @@ html, * {
 .logo {
     width: 27em;
     font-size: 0.7em;
+    border-top: none!important;
 }
 
 .search {

@@ -1,7 +1,7 @@
 <?php
 
-include_once 'app/functions.php';
+include 'app/functions.php';
+include 'app/router.php';
+$routes = require('routes.php');
 
-$collection = array_slice(getCache()['pokemon'], 0, 6);
-
-include 'views/index.view.php';
+boot(parse_url($_SERVER['REQUEST_URI'])['path'], $routes);

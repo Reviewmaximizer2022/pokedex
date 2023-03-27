@@ -32,18 +32,11 @@ function makeApiRequest(string $method = 'GET', string $url = '')
 
     try {
         $response = $guzzle->request($method, $url);
+
         return json_decode($response->getBody()->getContents(), true);
     } catch (\Exception $e) {
         echo 'error';
     }
-}
-
-/**
- * @throws \GuzzleHttp\Exception\GuzzleException
- */
-function getPokemon(string $pokemon = '')
-{
-    return makeApiRequest(url: "https://pokeapi.co/api/v2/pokemon/{$pokemon}");
 }
 
 function filter(string $type, array $options = []): array
@@ -67,10 +60,37 @@ function dump(object|array|string $data)
     echo '</pre>';
 }
 
-function getAllPokemon()
+function csrf_token()
 {
-    $sql = db()->prepare('SELECT id,name,description FROM pokemon WHERE description IS NULL');
-    $sql->execute();
+    $token = $_SESSION['token'] ?? '';
 
-    return $sql->fetchAll(PDO::FETCH_ASSOC);
+    echo "<input type='hidden' name='csrf_token' value='{$token}'/>";
+}
+
+function validate_token()
+{
+    $token = htmlspecialchars($_POST['csrf_token']);
+    if(!isset($token) || $_SESSION['csrf_token'] !== $token) {
+        $_SESSION['errors']['csrf_token'] = 'CSRF token mismatch';
+    }
+
+    if(!isset($_SESSION['csrf_token'])) {
+        $_SESSION['errors']['csrf_token'] = 'Add csrf_token() to your form field';
+        return false;
+    }
+
+    return true;
+}
+
+function authenticate()
+{
+    if(isset($_SESSION['user'])) {
+        redirect('/home');
+//        session_destroy();
+    }
+}
+
+function user()
+{
+    return $_SESSION['user'] ?? [];
 }

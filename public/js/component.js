@@ -68,6 +68,11 @@ observer.observe(lastCard)
 
 const render = (pokemons) => {
 
+    if(pokemons.length === 0) {
+        container.innerHTML = `<div class="alert alert-danger mt-5">No pokémons found</div>`
+        return;
+    }
+
     const rows = chunk(pokemons, 6).map((pokemonRow) => {
         const cols = pokemonRow.map(createPokemonCard).join('')
         const row = document.createElement('div')

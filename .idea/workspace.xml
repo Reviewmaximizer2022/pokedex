@@ -2,9 +2,32 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="91d20c90-b46a-47c1-8d3f-a9004d45067f" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/app/controllers/api/pokemon.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/controllers/auth/login.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/controllers/auth/logout.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/controllers/auth/register.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/controllers/index.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/router.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/css/admin.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/css/auth.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/css/fontawesome/all.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/authbg.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/js/admin.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/js/bootstrap.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/routes.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/views/auth/login.view.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/views/auth/register.view.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/views/errors/404.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/views/errors/message.view.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/views/home.view.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/api/contact.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app/functions.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/functions.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/component.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/component.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,11 +87,23 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="javascript.nodejs.core.library.configured.version" value="16.18.1" />
     <property name="javascript.nodejs.core.library.typings.version" value="16.18.1" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/css/fontawesome" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/public/css/fontawesome" />
+      <recent name="$PROJECT_DIR$/public/js" />
+      <recent name="$PROJECT_DIR$/public/css" />
+      <recent name="$PROJECT_DIR$/public/images" />
+      <recent name="$PROJECT_DIR$/app/controllers/api" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/views/auth" />
+      <recent name="$PROJECT_DIR$/app/controllers" />
+      <recent name="$PROJECT_DIR$/app/controllers/auth" />
       <recent name="$PROJECT_DIR$/app/api" />
     </key>
   </component>
@@ -121,7 +156,12 @@
       <workItem from="1679486772671" duration="1547000" />
       <workItem from="1679489989454" duration="1000" />
       <workItem from="1679490421257" duration="1212000" />
-      <workItem from="1679498402155" duration="20114000" />
+      <workItem from="1679498402155" duration="22600000" />
+      <workItem from="1679643216772" duration="5598000" />
+      <workItem from="1679677366020" duration="2432000" />
+      <workItem from="1679684310295" duration="449000" />
+      <workItem from="1679780622290" duration="5275000" />
+      <workItem from="1679850339287" duration="12513000" />
     </task>
     <servers />
   </component>

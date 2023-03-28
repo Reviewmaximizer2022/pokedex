@@ -1,3 +1,11 @@
+<?php
+    session_start();
+
+    if(isset($_SESSION['user'])) {
+        redirect('home');
+    }
+?>
+
 <!doctype html>
 <html lang="en">
 <head>

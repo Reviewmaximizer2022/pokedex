@@ -1,5 +1,9 @@
 <?php
-    authenticate();
+session_start();
+
+if(isset($_SESSION['user'])) {
+    redirect('home');
+}
 ?>
 
 <!doctype html>

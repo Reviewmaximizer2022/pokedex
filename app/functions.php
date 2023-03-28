@@ -82,14 +82,6 @@ function validate_token()
     return true;
 }
 
-function authenticate()
-{
-    if(isset($_SESSION['user'])) {
-        redirect('/home');
-//        session_destroy();
-    }
-}
-
 function user()
 {
     return $_SESSION['user'] ?? [];

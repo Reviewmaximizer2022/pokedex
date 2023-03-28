@@ -8,7 +8,7 @@ session_start();
 if (empty($email) || empty($password)) {
     $_SESSION['errors'] = 'Incorrect email or password';
 
-    return header('Location: /login');
+    redirect('login');
 }
 
 $query = db()->prepare('select name, email, password from users where email = ?');
@@ -17,7 +17,7 @@ $query->execute([$email]);
 if ($query->rowCount() == 0) {
     $_SESSION['errors'] = 'Incorrect email or password';
 
-    return header('Location: /login');
+    redirect('login');
 }
 
 $user = $query->fetch(PDO::FETCH_ASSOC);
@@ -25,7 +25,7 @@ $user = $query->fetch(PDO::FETCH_ASSOC);
 if (!password_verify($password, $user['password'])) {
     $_SESSION['errors'] = 'Incorrect email or password';
 
-    return header('Location: /login');
+    redirect('login');
 }
 
 $_SESSION['user'] = [
@@ -34,4 +34,4 @@ $_SESSION['user'] = [
     'csrf_token' => bin2hex(random_bytes(30))
 ];
 
-return header('Location: /home');
+redirect('home');

@@ -19,5 +19,16 @@ function abort(int $code = 404) {
 function redirect(string $route, int $code = 403) {
     http_response_code($code);
 
-    header("Location: $route");
+    header("Location: /$route");
+
+    exit;
+}
+
+function authenticate(int $id): bool
+{
+    if(!isset($_SESSION['user']) || $_SESSION['user']['id'] !== $id) {
+         abort();
+    }
+
+    return true;
 }

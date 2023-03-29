@@ -195,7 +195,7 @@
                             </div>
                         </div>
                         <!-- Total Revenue -->
-                        <div class="col-12 col-lg-8 order-2 order-md-3 order-lg-2 mb-4">
+                        <div class="col-12 col-lg-8 order-2 order-md-3 order-lg-2 mb-4 overflow-scroll" style="height: 375px;">
                             <div class="card">
                                 <div class="row row-bordered g-0">
                                     <div class="col-md-8">
@@ -206,22 +206,22 @@
                                                     <div class="card-body d-flex justify-content-between">
                                                         <section class="col-6">
                                                             <div class="d-flex">
-                                                                <h5><?= $pokemon['pokemon']['name'] ?></h5>
-                                                                <span>#<?= str_pad($pokemon['pokemon']['card_id'], 3, '0',STR_PAD_LEFT) ?></span>
+                                                                <h5><?= $pokemon['name'] ?></h5>
+                                                                <span>#<?= str_pad($pokemon['card_id'], 3, '0',STR_PAD_LEFT) ?></span>
                                                             </div>
                                                             <div class="mb-2">
-                                                                Level: <?= xpToLevel($pokemon['pokemon']['experience']) ?>
+                                                                Level: <?= xpToLevel($pokemon['experience']) ?>
                                                             </div>
-                                                            <div class="progress" role="progressbar" aria-label="Example with label" aria-valuenow="<?= calculatePercentageLeft($pokemon['pokemon']) ?>" aria-valuemin="0" aria-valuemax="100">
-                                                                <div class="progress-bar overflow-visible text-dark text-white fw-bold" style="width: <?= calculatePercentageLeft($pokemon['pokemon']) ?>%">
-                                                                    <?= xpLeft($pokemon['pokemon']) ?> / <?= totalXpUntilNextLevel($pokemon['pokemon']) ?> xp
+                                                            <div class="progress" role="progressbar" aria-label="Example with label" aria-valuenow="<?= calculatePercentageLeft($pokemon) ?>" aria-valuemin="0" aria-valuemax="100">
+                                                                <div class="progress-bar overflow-visible text-dark text-white fw-bold" style="width: <?= calculatePercentageLeft($pokemon) ?>%">
+                                                                    <?= $pokemon['experience'] ?> / <?= totalXpUntilNextLevel($pokemon) ?> xp
                                                                 </div>
                                                             </div>
 
-                                                            <p class="mt-3"><?= $pokemon['pokemon']['experience'] ?> xp</p>
+                                                            <p class="mt-3"><?= $pokemon['experience'] ?> xp</p>
                                                         </section>
                                                         <section class="col-4">
-                                                            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png" alt="" class="w-75">
+                                                            <img src="<?= $pokemon['image'] ?? 'https://m.media-amazon.com/images/I/71WkWKFRSWL.png' ?>" alt="" class="w-75">
                                                         </section>
                                                     </div>
                                                 </div>
@@ -241,13 +241,13 @@
                                             <div class="d-flex align-items-center">
                                                 <div class="me-2">
                                                     <span class="badge bg-label-primary"><i class="bx bx-dollar text-primary"></i></span>
-                                                    <span>$32.5k</span>
+                                                    <span>$0</span>
                                                 </div>
                                             </div>
                                             <div class="d-flex">
                                                 <div class="me-2">
                                                     <span class="badge bg-label-info p-2"><i class="bx bx-wallet text-info"></i></span>
-                                                    <span>2/1281</span>
+                                                    <span><?= count($pokemons) ?> /1281</span>
                                                 </div>
                                             </div>
                                         </div>

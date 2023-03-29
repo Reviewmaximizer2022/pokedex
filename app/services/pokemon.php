@@ -23,12 +23,14 @@ function calculateXpGained(array $pokemon, $trainer = true)
 
 function pokedex($limit = INF)
 {
-    $sql = '
-        SELECT pokemon.id,pokemon.card_id,name,base_experience,experience,xp_required 
+    $sql = "
+        SELECT pokemon.id,pokemon.card_id,name,base_experience,experience,xp_required,image 
         FROM pokemon 
+            LEFT JOIN pokemon_image
+                ON pokemon.id = pokemon_image.pokemon_id
             JOIN user_pokemon 
                 ON pokemon.id = user_pokemon.pokemon_id 
-        WHERE user_id = ?';
+        WHERE user_id = ? AND type = 'front_default'";
 
     if ($limit !== INF) {
         $sql .= " LIMIT $limit";
@@ -42,21 +44,7 @@ function pokedex($limit = INF)
 
     $pokedex = [];
     foreach ($pokemons as $pokemon) {
-        $xpGained = calculateXpGained($pokemon);
-
-        //TODO: Update and show when battle has end
-//        $pokemon['experience'] = $pokemon['experience'] += $xpGained;
-
-        $pokedex[] = [
-            'pokemon' => $pokemon,
-            'data' => [
-                'xp_gained' => $xpGained,
-                'level' => xpToLevel($pokemon['experience']),
-                //TODO: Update and show when battle has end
-//              'xp_to_next_level' => xpRequiredToNextLevel(xpToLevel($pokemon['experience'])) - $xpGained,
-                'xp_to_next_level' => xpRequiredToNextLevel(xpToLevel($pokemon['experience'])),
-            ]
-        ];
+        $pokedex[] = $pokemon;
     }
 
     return $pokedex;
@@ -106,4 +94,12 @@ function xpLeft(array $pokemon)
     $nextLevelStart = $currentLevelStart + xpRequiredToNextLevel(xpToLevel($pokemon['experience']));
 
     return $nextLevelStart - $pokemon['experience'];
+}
+
+function battle(array $pokemon)
+{
+    $xpGained = calculateXpGained($pokemon);
+
+    //TODO: Update and show when battle has end
+//        $pokemon['experience'] = $pokemon['experience'] += $xpGained;
 }

@@ -82,7 +82,11 @@ function validate_token()
     return true;
 }
 
-function user()
+function auth()
 {
+    if(!isset($_SESSION)) {
+        session_start();
+    }
+
     return $_SESSION['user'] ?? [];
 }

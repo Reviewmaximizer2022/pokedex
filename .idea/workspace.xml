@@ -2,21 +2,76 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="91d20c90-b46a-47c1-8d3f-a9004d45067f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/app/controllers/home.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/services/pokemon.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/views/layout/footer.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/views/layout/header.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/views/layout/sidenav.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/layout/css/core.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/layout/css/theme-default.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/layout/fonts/boxicons.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/layout/fonts/boxicons/boxicons.eot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/layout/fonts/boxicons/boxicons.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/layout/fonts/boxicons/boxicons.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/layout/fonts/boxicons/boxicons.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/layout/fonts/boxicons/boxicons.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/layout/img/avatars/1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/layout/img/avatars/5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/layout/img/avatars/6.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/layout/img/avatars/7.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/layout/img/backgrounds/18.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/layout/img/elements/1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/layout/img/elements/11.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/layout/img/elements/12.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/layout/img/elements/13.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/layout/img/elements/17.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/layout/img/elements/18.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/layout/img/elements/19.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/layout/img/elements/2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/layout/img/elements/20.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/layout/img/elements/3.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/layout/img/elements/4.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/layout/img/elements/5.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/layout/img/elements/7.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/layout/img/favicon/favicon.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/layout/img/icons/brands/asana.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/layout/img/icons/brands/behance.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/layout/img/icons/brands/dribbble.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/layout/img/icons/brands/facebook.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/layout/img/icons/brands/github.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/layout/img/icons/brands/google.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/layout/img/icons/brands/instagram.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/layout/img/icons/brands/mailchimp.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/layout/img/icons/brands/slack.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/layout/img/icons/brands/twitter.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/layout/img/icons/unicons/cc-primary.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/layout/img/icons/unicons/cc-success.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/layout/img/icons/unicons/cc-warning.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/layout/img/icons/unicons/chart-success.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/layout/img/icons/unicons/chart.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/layout/img/icons/unicons/paypal.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/layout/img/icons/unicons/wallet-info.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/layout/img/icons/unicons/wallet.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/layout/img/illustrations/girl-doing-yoga-light.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/layout/img/illustrations/man-with-laptop-light.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/layout/img/illustrations/page-misc-error-light.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/layout/img/layouts/layout-container-light.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/layout/img/layouts/layout-fluid-light.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/layout/img/layouts/layout-without-menu-light.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/layout/img/layouts/layout-without-navbar-light.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/layout/js/config.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/layout/js/helpers.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/layout/js/main.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/layout/js/menu.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/layout/perfect-scrollbar/perfect-scrollbar.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/layout/perfect-scrollbar/perfect-scrollbar.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/controllers/auth/login.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/auth/login.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/auth/logout.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/auth/logout.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/controllers/home.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/home.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/functions.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/functions.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/router.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/router.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/services/pokemon.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/services/pokemon.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/auth/login.view.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/auth/login.view.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/auth/register.view.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/auth/register.view.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/errors/message.view.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/errors/message.view.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/home.view.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/home.view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/layout/footer.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/layout/footer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/layout/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/layout/header.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/layout/sidenav.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/layout/sidenav.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,7 +131,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="javascript.nodejs.core.library.configured.version" value="16.18.1" />
     <property name="javascript.nodejs.core.library.typings.version" value="16.18.1" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/css/fontawesome" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/layout/img" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.project.grazie" />
     <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
@@ -84,17 +139,18 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/public/css/fontawesome" />
-      <recent name="$PROJECT_DIR$/public/js" />
+      <recent name="$PROJECT_DIR$/public/layout/img" />
+      <recent name="$PROJECT_DIR$/public/layout" />
+      <recent name="$PROJECT_DIR$/public/layout/js" />
+      <recent name="$PROJECT_DIR$/public/layout/fonts" />
       <recent name="$PROJECT_DIR$/public/css" />
-      <recent name="$PROJECT_DIR$/public/images" />
-      <recent name="$PROJECT_DIR$/app/controllers/api" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/public/layout/fonts/boxicons" />
+      <recent name="$PROJECT_DIR$/public/layout/css" />
       <recent name="$PROJECT_DIR$/views/auth" />
       <recent name="$PROJECT_DIR$/app/controllers" />
       <recent name="$PROJECT_DIR$/app/controllers/auth" />
-      <recent name="$PROJECT_DIR$/app/api" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -154,7 +210,9 @@
       <workItem from="1679850339287" duration="12610000" />
       <workItem from="1679936152312" duration="1377000" />
       <workItem from="1679946026701" duration="7120000" />
-      <workItem from="1680011488940" duration="90000" />
+      <workItem from="1680011488940" duration="137000" />
+      <workItem from="1680011639388" duration="2445000" />
+      <workItem from="1680089578415" duration="13546000" />
     </task>
     <servers />
   </component>

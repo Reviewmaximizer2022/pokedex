@@ -2,6 +2,6 @@
 
 include dirname(__DIR__).'/services/pokemon.php';
 
-dd(getPokemonData('bulbasaur'));
+$pokemons = pokedex(limit: 5);
 
 include 'views/home.view.php';

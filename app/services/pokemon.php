@@ -2,7 +2,7 @@
 
 function calculateXpGained(array $pokemon, $trainer = true)
 {
-    if($trainer) {
+    if ($trainer) {
         $a = 1.5;
     } else {
         $a = 1.0;
@@ -14,38 +14,96 @@ function calculateXpGained(array $pokemon, $trainer = true)
     //Base Experience
     $b = $pokemon['base_experience'];
     //Level of pokemon defeated
-    $l = 1;
-    //Amount of pokémon defeated
-    $s = 1;
+    $l = 5;
+    //Amount of pokémon defeated that didn't not faint
+    $s = 6;
 
     return round(number_format($a * $t * $b * $l / (7 * $s), 2, '.', ','));
 }
 
-function getPokemonData(string $pokemon)
+function pokedex($limit = INF)
 {
-    $sql = db()->prepare('SELECT pokemon.id,name,base_experience,experience,xp_required FROM pokemon JOIN user_pokemon ON pokemon.id = user_pokemon.pokemon_id WHERE name = ?');
-    $sql->execute([$pokemon]);
+    $sql = '
+        SELECT pokemon.id,pokemon.card_id,name,base_experience,experience,xp_required 
+        FROM pokemon 
+            JOIN user_pokemon 
+                ON pokemon.id = user_pokemon.pokemon_id 
+        WHERE user_id = ?';
 
-    $pokemon = $sql->fetch(PDO::FETCH_ASSOC);
+    if ($limit !== INF) {
+        $sql .= " LIMIT $limit";
+    }
 
-    $xpGained = calculateXpGained($pokemon);
+    $sql = db()->prepare($sql);
 
-    return [
-        'pokemon' => $pokemon,
-        'data' => [
-            'xp_gained' => $xpGained,
-            'level' => xpToLevel($pokemon['experience']),
-            'xp_required' => xpRequiredToNextLevel(xpToLevel($pokemon['experience'])),
-        ],
-    ];
+    $sql->execute([auth()['id']]);
+
+    $pokemons = $sql->fetchAll(PDO::FETCH_ASSOC);
+
+    $pokedex = [];
+    foreach ($pokemons as $pokemon) {
+        $xpGained = calculateXpGained($pokemon);
+
+        //TODO: Update and show when battle has end
+//        $pokemon['experience'] = $pokemon['experience'] += $xpGained;
+
+        $pokedex[] = [
+            'pokemon' => $pokemon,
+            'data' => [
+                'xp_gained' => $xpGained,
+                'level' => xpToLevel($pokemon['experience']),
+                //TODO: Update and show when battle has end
+//              'xp_to_next_level' => xpRequiredToNextLevel(xpToLevel($pokemon['experience'])) - $xpGained,
+                'xp_to_next_level' => xpRequiredToNextLevel(xpToLevel($pokemon['experience'])),
+            ]
+        ];
+    }
+
+    return $pokedex;
+}
+
+function totalXpToNextLevel(int $xp)
+{
+    return xpToLevel($xp) ** 3;
 }
 
 function xpRequiredToNextLevel(int $level)
 {
-    return pow(($level+1), 3) - pow($level, 3);
+    return ($level + 1) ** 3 - $level ** 3;
 }
 
-function xpToLevel($xp)
+function xpToLevel(int $xp)
 {
-    return bcdiv($xp ** (1/3), 1, 0);
+    return bcdiv($xp ** (1 / 3), 1);
+}
+
+function calculatePercentageLeft(array $pokemon)
+{
+    $currentLevelStart = totalXpToNextLevel($pokemon['experience']);
+
+    $nextLevelStart = $currentLevelStart + xpRequiredToNextLevel(xpToLevel($pokemon['experience']));
+
+    $currentExp = $pokemon['experience'];
+
+    $diff = $nextLevelStart - $currentLevelStart;
+
+    $progressBetweenLevels = $currentExp - $currentLevelStart;
+
+    return number_format(($progressBetweenLevels / $diff) * 100, 2, '.');
+}
+
+function totalXpUntilNextLevel(array $pokemon)
+{
+    $currentLevelStart = totalXpToNextLevel($pokemon['experience']);
+
+    return $currentLevelStart + xpRequiredToNextLevel(xpToLevel($pokemon['experience']));
+}
+
+function xpLeft(array $pokemon)
+{
+    $currentLevelStart = totalXpToNextLevel($pokemon['experience']);
+
+    $nextLevelStart = $currentLevelStart + xpRequiredToNextLevel(xpToLevel($pokemon['experience']));
+
+    return $nextLevelStart - $pokemon['experience'];
 }

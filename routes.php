@@ -16,4 +16,7 @@ return [
 
     //API uri's
     '/api/pokemon' => 'app/controllers/api/pokemon.php',
+
+    //Test uri's
+    '/test' => 'views/home.view.php'
 ];

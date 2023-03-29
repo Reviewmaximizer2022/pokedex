@@ -11,7 +11,7 @@ if (empty($email) || empty($password)) {
     redirect('login');
 }
 
-$query = db()->prepare('select name, email, password from users where email = ?');
+$query = db()->prepare('select id, name, email, password from users where email = ?');
 $query->execute([$email]);
 
 if ($query->rowCount() == 0) {
@@ -29,6 +29,7 @@ if (!password_verify($password, $user['password'])) {
 }
 
 $_SESSION['user'] = [
+    'id' => $user['id'],
     'name' => $user['name'],
     'email' => $user['email'],
     'csrf_token' => bin2hex(random_bytes(30))

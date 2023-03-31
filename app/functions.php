@@ -90,3 +90,22 @@ function auth()
 
     return $_SESSION['user'] ?? [];
 }
+
+/**
+ * @throws Exception
+ */
+function validateApi(): bool
+{
+    if(!isset($_SERVER['HTTP_X_API_KEY'])) {
+        throw new \Exception('No API key provided');
+    }
+
+    $query = db()->prepare('SELECT `key` FROM api_keys WHERE `key` = ?');
+    $query->execute([$_SERVER['HTTP_X_API_KEY']]);
+
+    if(!$query->rowCount()) {
+        throw new \Exception('Invalid API key');
+    }
+
+    return true;
+}

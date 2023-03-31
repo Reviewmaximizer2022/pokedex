@@ -33,9 +33,9 @@ function authenticate(int $id): bool
     return true;
 }
 
-function route(string $route): bool
+function is(string $route): bool
 {
-    if(parse_url($_SERVER['REQUEST_URI'])['path'] === $route) {
+    if(ltrim(parse_url($_SERVER['REQUEST_URI'])['path'], '/') === $route) {
         return true;
     }
 

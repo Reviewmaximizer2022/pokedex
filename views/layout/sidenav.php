@@ -16,10 +16,17 @@
 
     <ul class="menu-inner py-1">
         <!-- Dashboard -->
-        <li class="menu-item <?php if(route('/home')): ?> active <?php endif; ?>">
+        <li class="menu-item <?php if(is('home')): ?> active <?php endif; ?>">
             <a href="/home" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                <div data-i18n="Analytics">Dashboard</div>
+                <div data-i18n="Dashboard">Dashboard</div>
+            </a>
+        </li>
+
+        <li class="menu-item <?php if(is('pokedex')): ?> active <?php endif; ?>">
+            <a href="/pokedex" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-list-minus"></i>
+                <div data-i18n="Pokedex">Pokedex</div>
             </a>
         </li>
 

@@ -21,35 +21,6 @@ function calculateXpGained(array $pokemon, $trainer = true)
     return round(number_format($a * $t * $b * $l / (7 * $s), 2, '.', ','));
 }
 
-function pokedex($limit = INF)
-{
-    $sql = "
-        SELECT pokemon.id,pokemon.card_id,name,base_experience,experience,xp_required,image 
-        FROM pokemon 
-            LEFT JOIN pokemon_image
-                ON pokemon.id = pokemon_image.pokemon_id
-            JOIN user_pokemon 
-                ON pokemon.id = user_pokemon.pokemon_id 
-        WHERE user_id = ? AND type = 'front_default'";
-
-    if ($limit !== INF) {
-        $sql .= " LIMIT $limit";
-    }
-
-    $sql = db()->prepare($sql);
-
-    $sql->execute([auth()['id']]);
-
-    $pokemons = $sql->fetchAll(PDO::FETCH_ASSOC);
-
-    $pokedex = [];
-    foreach ($pokemons as $pokemon) {
-        $pokedex[] = $pokemon;
-    }
-
-    return $pokedex;
-}
-
 function totalXpToNextLevel(int $xp)
 {
     return xpToLevel($xp) ** 3;
@@ -102,4 +73,40 @@ function battle(array $pokemon)
 
     //TODO: Update and show when battle has end
 //        $pokemon['experience'] = $pokemon['experience'] += $xpGained;
+}
+
+function pokedex(int $limit = INF)
+{
+    $sql = "
+        SELECT pokemon.id,pokemon.card_id,name,base_experience,experience,xp_required,image
+        FROM pokemon
+            LEFT JOIN pokemon_image
+                ON pokemon.id = pokemon_image.pokemon_id
+            JOIN user_pokemon
+                ON pokemon.id = user_pokemon.pokemon_id
+        WHERE user_id = ? AND type = 'front_default'";
+
+    if ($limit !== INF) {
+        $sql .= " LIMIT $limit";
+    }
+
+    $sql = db()->prepare($sql);
+
+    $sql->execute([auth()['id']]);
+
+    $pokemons = $sql->fetchAll(PDO::FETCH_ASSOC);
+
+    $query = "SELECT type.name FROM type JOIN pokemon_type ON type.id = pokemon_type.type_id WHERE pokemon_type.pokemon_id = ?";
+    $query = db()->prepare($query);
+
+    $pokedex = [];
+    foreach ($pokemons as $pokemon) {
+        $query->execute([$pokemon['id']]);
+        $types = $query->fetchAll(PDO::FETCH_ASSOC);
+        $pokedex[] = [
+            ...$pokemon, ...['types' => $types]
+        ];
+    }
+
+    return $pokedex;
 }

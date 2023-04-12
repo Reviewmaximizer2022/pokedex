@@ -30,6 +30,13 @@
             </a>
         </li>
 
+        <li class="menu-item <?php if(is('pokemon/catch')): ?> active <?php endif; ?>">
+            <a href="/pokemon/catch" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-list-minus"></i>
+                <div data-i18n="Catch">Catch pokemon</div>
+            </a>
+        </li>
+
         <!-- Layouts -->
 <!--        <li class="menu-item">-->
 <!--            <a href="javascript:void(0);" class="menu-link menu-toggle">-->

@@ -67,7 +67,7 @@ function csrf_token()
     echo "<input type='hidden' name='csrf_token' value='{$token}'/>";
 }
 
-function validate_token()
+function validate_token(): bool
 {
     $token = htmlspecialchars($_POST['csrf_token']);
     if(!isset($token) || $_SESSION['csrf_token'] !== $token) {

@@ -42,11 +42,9 @@ function calculatePercentageLeft(array $pokemon)
 
     $nextLevelStart = $currentLevelStart + xpRequiredToNextLevel(xpToLevel($pokemon['experience']));
 
-    $currentExp = $pokemon['experience'];
-
     $diff = $nextLevelStart - $currentLevelStart;
 
-    $progressBetweenLevels = $currentExp - $currentLevelStart;
+    $progressBetweenLevels = $pokemon['experience'] - $currentLevelStart;
 
     return number_format(($progressBetweenLevels / $diff) * 100, 2, '.');
 }
@@ -58,15 +56,6 @@ function totalXpUntilNextLevel(array $pokemon)
     return $currentLevelStart + xpRequiredToNextLevel(xpToLevel($pokemon['experience']));
 }
 
-function xpLeft(array $pokemon)
-{
-    $currentLevelStart = totalXpToNextLevel($pokemon['experience']);
-
-    $nextLevelStart = $currentLevelStart + xpRequiredToNextLevel(xpToLevel($pokemon['experience']));
-
-    return $nextLevelStart - $pokemon['experience'];
-}
-
 function battle(array $pokemon)
 {
     $xpGained = calculateXpGained($pokemon);
@@ -75,7 +64,14 @@ function battle(array $pokemon)
 //        $pokemon['experience'] = $pokemon['experience'] += $xpGained;
 }
 
-function pokedex(int $limit = INF)
+function getRandomXp(int $exp)
+{
+    $randomAmountXp = rand($exp, 5000);
+
+    return xpToLevel($randomAmountXp);
+}
+
+function pokedex(int $limit)
 {
     $sql = "
         SELECT pokemon.id,pokemon.card_id,name,base_experience,experience,xp_required,image
@@ -84,7 +80,8 @@ function pokedex(int $limit = INF)
                 ON pokemon.id = pokemon_image.pokemon_id
             JOIN user_pokemon
                 ON pokemon.id = user_pokemon.pokemon_id
-        WHERE user_id = ? AND type = 'front_default'";
+        WHERE user_id = ? AND type = 'front_default' 
+        ORDER BY experience DESC";
 
     if ($limit !== INF) {
         $sql .= " LIMIT $limit";
@@ -96,7 +93,7 @@ function pokedex(int $limit = INF)
 
     $pokemons = $sql->fetchAll(PDO::FETCH_ASSOC);
 
-    $query = "SELECT type.name FROM type JOIN pokemon_type ON type.id = pokemon_type.type_id WHERE pokemon_type.pokemon_id = ?";
+    $query = "SELECT type.name FROM type JOIN pokemon_type ON type.id = pokemon_type.type_id WHERE pokemon_type.pokemon_id = ? ORDER BY type.name";
     $query = db()->prepare($query);
 
     $pokedex = [];

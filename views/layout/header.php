@@ -25,7 +25,7 @@ if(!auth()['name']) {
     <meta name="description" content="" />
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="public/layout/img/favicon/favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="/public/layout/img/favicon/favicon.ico" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -36,19 +36,18 @@ if(!auth()['name']) {
     />
 
     <!-- Icons. Uncomment required icon fonts -->
-    <link rel="stylesheet" href="public/layout/fonts/boxicons.css" />
+    <link rel="stylesheet" href="/public/layout/fonts/boxicons.css" />
 
     <!-- Core CSS -->
-    <link rel="stylesheet" href="public/layout/css/core.css" class="template-customizer-core-css" />
-    <link rel="stylesheet" href="public/layout/css/theme-default.css" class="template-customizer-theme-css" />
-    <!--    <link rel="stylesheet" href="public/layout/css/demo.css" />-->
+    <link rel="stylesheet" href="/public/layout/css/core.css" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="/public/layout/css/theme-default.css" class="template-customizer-theme-css" />
 
     <!-- Vendors CSS -->
-    <link rel="stylesheet" href="public/layout/perfect-scrollbar/perfect-scrollbar.css" />
+    <link rel="stylesheet" href="/public/layout/perfect-scrollbar/perfect-scrollbar.css" />
 
     <!-- Helpers -->
-    <script src="public/layout/js/helpers.js" type="module"></script>
-    <script src="public/layout/js/config.js"></script>
+    <script src="/public/layout/js/helpers.js" type="module"></script>
+    <script src="/public/layout/js/config.js"></script>
 </head>
 
 <body>

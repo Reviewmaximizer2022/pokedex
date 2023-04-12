@@ -32,7 +32,7 @@ $_SESSION['user'] = [
     'id' => $user['id'],
     'name' => $user['name'],
     'email' => $user['email'],
-    'csrf_token' => bin2hex(random_bytes(30))
+    'csrf_token' => bin2hex(random_bytes(30)) //0irjfujdj84yrtgudfphreghreigdfh
 ];
 
 redirect('home');

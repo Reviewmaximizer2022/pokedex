@@ -14,6 +14,7 @@ return [
     //Panel uri's
     '/home' => 'app/controllers/home.php',
     '/pokedex' => 'app/controllers/pokedex.php',
+    '/pokemon/catch' => 'app/controllers/catch.php',
 
     //API uri's
     '/api/pokemon' => 'app/controllers/api/pokemon.php',

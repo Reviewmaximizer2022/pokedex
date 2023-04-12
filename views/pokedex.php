@@ -126,11 +126,15 @@
                     <div class="col-lg-12 mb-4 order-0">
                         <div class="card overflow-scroll" style="height: 400px;">
                             <div class="d-flex align-items-end row">
-                                <div class="col-sm-7">
-                                    <div class="card-body pokemons">
-                                        <h5 class="card-title text-primary">My pokemon</h5>
-                                            <?php foreach($pokemons as $pokemon): ?>
-                                                <div class="card shadow-sm my-2">
+                                <div class="card-body pokemons">
+                                    <h5 class="card-title text-primary">My pokemon</h5>
+                                        <?php foreach($pokemons as $key => $pokemon): ?>
+
+                                        <?php if($key % 3 === 0): ?>
+                                            <div class="row">
+                                        <?php endif; ?>
+                                            <div class="col-4">
+                                                <div class="card card-custom shadow-sm my-2 card-bg-<?= $pokemon['types'][0]['name'] ?>">
                                                     <div class="card-body d-flex justify-content-between">
                                                         <section class="col-6">
                                                             <div class="d-flex">
@@ -153,21 +157,21 @@
                                                             </div>
 
                                                         </section>
-                                                        <section class="col-4">
+                                                        <section class="col-4 my-auto">
                                                             <img src="<?= $pokemon['image'] ?? 'https://m.media-amazon.com/images/I/71WkWKFRSWL.png' ?>" alt="" class="w-75">
                                                         </section>
                                                     </div>
                                                 </div>
-                                            <?php endforeach; ?>
+                                            </div>
+
+                                            <?php if($key % 3 === 2): ?>
+                                                </div>
+                                            <?php endif; ?>
+
+                                        <?php endforeach; ?>
 
 
-                                        <button class="btn btn-sm btn-outline-primary col-12" id="loadMore">Load more</button>
-                                    </div>
-                                </div>
-                                <div class="col-sm-5 text-center text-sm-left">
-                                    <div class="card-body pb-0 px-0 px-md-4 mh-25 mw-100 overflow-hidden">
-                                        <img class="position-relative" style="top: 50px; filter: blur(1.5px); opacity: .6;" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10041.png" height="200" alt="pokemon">
-                                    </div>
+                                    <button class="btn btn-sm btn-outline-primary col-6 mx-auto mt-3" id="loadMore">Load more</button>
                                 </div>
                             </div>
                         </div>

@@ -107,3 +107,61 @@ function pokedex(int $limit)
 
     return $pokedex;
 }
+
+function down($x) {
+    // Rounds down to the nearest 1/4096th
+    return floor($x * 4096) / 4096;
+}
+
+function roundNumber($x) {
+    // Rounds to the nearest 1/4096th
+    return round($x * 4096) / 4096;
+}
+
+function calculateCatchRate(array $pokemon, $ball = 'pokeball') {
+
+    $c = $pokemon['capture_rate'];
+    $weight = $pokemon['weight'];
+    $currentLevel = xpToLevel($pokemon['base_experience']);
+
+    if ($ball === 'heavy-ball') {
+        if ($weight >= 3000) {
+            $c += 30;
+        } else if ($weight >= 2000) {
+            $c += 20;
+        } else if ($weight < 1000) {
+            $c -= 20;
+        }
+    }
+
+    $c = max($c, 1);
+
+    $b = 1;
+
+    if ($b === -1) {
+        return 256;
+    }
+
+    $s = 1;
+    $m = 100;
+    $h = 100;
+
+    $g = 1;
+    $l = 10;
+
+    if ($currentLevel < 21) {
+        $l = (30 - $currentLevel);
+    }
+
+    $d = 4096;
+
+    $x = min(255,roundNumber(roundNumber(down(down(roundNumber(roundNumber((3 * $m - 2 * $h) * $g) * $c * $b) / (3 * $m)) * $l / 10) * $s) * $d / 4096));
+
+    return number_format($x, 2, '.');
+}
+
+function catchPokemon()
+{
+    $query = db()->prepare('SELECT * FROM pokemon LIMIT 3');
+}
+

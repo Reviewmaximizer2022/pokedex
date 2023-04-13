@@ -15,6 +15,7 @@ return [
     '/home' => 'app/controllers/home.php',
     '/pokedex' => 'app/controllers/pokedex.php',
     '/pokemon/catch' => 'app/controllers/catch.php',
+    '/pokemon/catch/try' => 'app/controllers/tryCatch.php',
 
     //API uri's
     '/api/pokemon' => 'app/controllers/api/pokemon.php',

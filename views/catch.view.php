@@ -116,20 +116,29 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
-                            <div class="row">
-                                <?php foreach($pokemons as $pokemon): ?>
-                                    <div class="col-4">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <img src="<?= $pokemon['image'] ?>" alt="" class="w-25">
-                                                <?= $pokemon['name'] ?>
+                            <?php if(is_array($pokemons)): ?>
 
-                                                <?= xpToLevel($pokemon['base_experience']) ?>
-                                            </div>
+                            <form action="/pokemon/catch/try" method="POST" class="row">
+                            <?php foreach($pokemons as $pokemon): ?>
+                                <div class="col-4">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <input type="hidden" name="pokemon" value="<?= $pokemon['id'] ?>">
+                                            <button type="submit">
+                                                <img src="<?= $pokemon['image'] ?>" alt="" class="w-25">
+                                            </button>
+                                            <?= $pokemon['name'] ?>
+
+                                            <?= xpToLevel($pokemon['base_experience']) ?>
                                         </div>
                                     </div>
-                                <?php endforeach; ?>
-                            </div>
+                                </div>
+                            <?php endforeach; ?>
+                            </form>
+
+                            <?php else: ?>
+                                <div class="alert alert-danger my-auto text-center">You have no points anymore, come back tomorrow!</div>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>

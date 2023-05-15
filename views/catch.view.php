@@ -117,25 +117,36 @@
                     <div class="card">
                         <div class="card-body">
                             <?php if(is_array($pokemons)): ?>
-
-                            <form action="/pokemon/catch/try" method="POST" class="row">
-                            <?php foreach($pokemons as $pokemon): ?>
+                            <div class="row">
+                                <?php foreach($pokemons as $pokemon): ?>
                                 <div class="col-4">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <input type="hidden" name="pokemon" value="<?= $pokemon['id'] ?>">
-                                            <button type="submit">
-                                                <img src="<?= $pokemon['image'] ?>" alt="" class="w-25">
-                                            </button>
-                                            <?= $pokemon['name'] ?>
+                                    <form action="/pokemon/catch/try" method="POST">
+                                        <input type="hidden" name="pokemon_id" value="<?= $pokemon['id'] ?>">
+                                        <input type="hidden" name="capture_rate" value="<?= $pokemon['capture_rate'] ?>">
+                                        <input type="hidden" name="catch_rate" value="<?= $pokemon['catch_rate'] ?>">
+                                        <input type="hidden" name="experience" value="<?= $pokemon['base_experience'] ?>">
 
-                                            <?= xpToLevel($pokemon['base_experience']) ?>
-                                        </div>
-                                    </div>
+                                        <button type="submit" class="btn btn-transparent col-12">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <img src="<?= $pokemon['image'] ?>" alt="" class="w-25">
+                                                    <?= $pokemon['name'] ?>
+
+                                                    <?= xpToLevel($pokemon['base_experience']) ?>
+
+                                                    <div class="progress mt-4" role="progressbar" aria-label="Example with label" aria-valuenow="<?= $pokemon['capture_rate'] ?>" aria-valuemin="0" aria-valuemax="100">
+                                                        <div class="progress-bar overflow-visible text-dark text-white fw-bold" style="width: <?= $pokemon['capture_rate'] ?>%">
+                                                            <?= $pokemon['capture_rate'] ?> / 100 %
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </button>
+                                    </form>
                                 </div>
-                            <?php endforeach; ?>
-                            </form>
-
+                                <?php endforeach; ?>
+                            </div>
                             <?php else: ?>
                                 <div class="alert alert-danger my-auto text-center">You have no points anymore, come back tomorrow!</div>
                             <?php endif; ?>
